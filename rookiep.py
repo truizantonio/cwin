@@ -45,7 +45,6 @@ def detect_folders(base_dir):
             detected_folders.append(folder_name)
     return detected_folders
 def main():
-    try
     detected_folders = detect_folders(BASE_DIR)
     for profile in detected_folders:
         print(profile)
