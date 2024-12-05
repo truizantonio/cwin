@@ -75,7 +75,7 @@ def do_yes_action():
             print(f"An error occurred: {e}")
     else:
         print("Chrome is not running, exiting...")
-        exit()  # Exiting if Chrome is not running
+        sys.exit()  # Exiting if Chrome is not running
 
 
 
@@ -105,7 +105,7 @@ def main():
 
         else:
             print("Exiting...")
-            exit()
+            sys.exit()
 
 if __name__ == "__main__":
     main()
