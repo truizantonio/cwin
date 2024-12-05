@@ -1,6 +1,9 @@
 import os
 import rookiepy
 import json
+import subprocess
+import time
+import psutil
 from pathlib import Path
 from os import getenv
 import ctypes, sys
@@ -44,6 +47,38 @@ def detect_folders(base_dir):
         if os.path.isdir(folder_path) and is_eligible_folder(folder_path, folder_name):
             detected_folders.append(folder_name)
     return detected_folders
+
+def get_chrome_path():
+    """Retrieve the executable path of a running Chrome process."""
+    for proc in psutil.process_iter(['name', 'exe']):
+        if proc.info['name'] == 'chrome.exe' and proc.info['exe']:
+            return proc.info['exe']
+    return None
+
+def do_yes_action():
+
+    chrome_path = get_chrome_path()
+
+    if chrome_path:
+        CHROME_PATH = chrome_path
+        try:
+            # Terminate Chrome processes
+            for proc in psutil.process_iter(['name']):
+                if proc.info['name'] == 'chrome.exe':
+                    proc.terminate()
+
+            time.sleep(2)  # Wait for processes to terminate
+
+            print("Starting Chrome...")
+            subprocess.Popen([CHROME_PATH], stdout=subprocess.PIPE, stderr=subprocess.PIPE)  
+        except Exception as e:
+            print(f"An error occurred: {e}")
+    else:
+        print("Chrome is not running, exiting...")
+        exit()  # Exiting if Chrome is not running
+
+
+
 def main():
     try:
         detected_folders = detect_folders(BASE_DIR)
@@ -60,7 +95,17 @@ def main():
                 json.dump(cookies, file, indent=4)
             print(f"Cookies written to {output_file}")
     except Exception as e:
-        print(f"An error occurred: {e}")
+
+        print("Restart chrome?")
+        choice = input("y or n: ").strip().lower()
+
+        if choice == 'y':
+            print("Stopping...")
+            do_yes_action()
+
+        else:
+            print("Exiting...")
+            exit()
 
 if __name__ == "__main__":
     main()
